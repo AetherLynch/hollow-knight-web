@@ -4,15 +4,12 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-// Servir archivos estáticos de la carpeta "public"
 app.use(express.static(path.join(__dirname, "public")));
 
-// Ruta principal
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// Endpoint de ejemplo tipo API (opcional, solo por demo)
 app.get("/api/lore", (req, res) => {
   res.json({
     title: "Hollow Knight",
@@ -21,6 +18,12 @@ app.get("/api/lore", (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Servidor Hollow Knight escuchando en http://localhost:${PORT}`);
-});
+// Exportamos la app para poder probarla con Jest/Supertest
+module.exports = app;
+
+// Solo escuchamos si se ejecuta directamente (no en los tests)
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Servidor Hollow Knight escuchando en http://localhost:${PORT}`);
+  });
+}

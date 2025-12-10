@@ -1,14 +1,22 @@
 {
   "name": "hollow-knight-web",
   "version": "1.0.0",
-  "description": "Aplicación web temática de Hollow Knight con Node y Express, lista para Docker.",
+  "description": "Aplicación web temática de Hollow Knight con Node y Express, lista para Docker y Render.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "jest"
   },
   "author": "aleclynch",
   "license": "MIT",
   "dependencies": {
     "express": "^4.21.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.4"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
