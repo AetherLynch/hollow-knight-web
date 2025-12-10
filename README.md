@@ -1,4 +1,4 @@
-# Hollow Knight Web 🌑🦗
+# Hollow Knight Web
 
 Aplicación web temática de **Hollow Knight**, desarrollada con **Node.js + Express**, 
 empaquetada en **Docker** y desplegada en **Render**.  
