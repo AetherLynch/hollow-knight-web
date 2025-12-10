@@ -10,9 +10,6 @@ Incluye **Infraestructura como Código** (Terraform) y **pipeline de CI** con pr
 
 - URL pública: `https://hollow-knight-web.onrender.com/`
 
-> Reemplazar por el URL real de Render o por tu dominio personalizado si lo configuraste.
-
----
 
 ## Estructura del repositorio
 
