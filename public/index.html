@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hollow Knight Web</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: radial-gradient(circle at top, #2b2b4f, #050509);
+      color: #f3f3f3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2.8rem;
+      letter-spacing: 2px;
+    }
+
+    h2 {
+      margin-top: 0.5rem;
+      font-weight: 300;
+      color: #c0c0ff;
+    }
+
+    /* Contenedor general de lore */
+    .lore-section {
+      background: rgba(15, 15, 30, 0.9);
+      padding: 1.5rem;
+      margin-top: 1rem;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 900px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+    }
+
+    .lore-section p {
+      line-height: 1.6;
+      font-size: 1.1rem;
+    }
+
+    /* Grid de personajes */
+    .characters-title {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 2rem;
+      color: #c0c0ff;
+    }
+
+    .characters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      width: 90%;
+      max-width: 1000px;
+      margin-top: 1rem;
+    }
+
+    .character-card {
+      background: rgba(10, 10, 20, 0.85);
+      padding: 1rem;
+      border-radius: 14px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .character-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+    }
+
+    .character-card img {
+      width: 100%;
+      max-width: 150px;
+      height: auto;
+      margin-bottom: 0.8rem;
+      filter: drop-shadow(0 0 8px rgba(255,255,255,0.2));
+    }
+
+    .character-name {
+      font-size: 1.2rem;
+      color: #e0e0ff;
+      margin-bottom: 0.3rem;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 1rem;
+      opacity: 0.7;
+      text-align: center;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>HOLLOW KNIGHT WEB</h1>
+    <h2>Explora Hallownest desde tu navegador</h2>
+  </header>
+
+  <!-- Sección explicando de qué trata el juego -->
+  <section class="lore-section">
+    <h2>¿De qué trata Hollow Knight?</h2>
+    <p>
+      <strong>Hollow Knight</strong> es un metroidvania ambientado en <strong>Hallownest</strong>, un vasto reino en ruinas 
+      lleno de criaturas insectoides, secretos ocultos y desafiantes enemigos.  
+      Interpretas a <strong>El Caballero</strong>, un viajero silencioso que desciende a las profundidades para descubrir 
+      el origen de una misteriosa infección que corrompe la tierra.
+    </p>
+    <p>
+      A lo largo del viaje encontrarás personajes memorables, jefes icónicos y una atmósfera única llena de 
+      melancolía, belleza y misterio que han convertido al juego en una obra maestra del género.
+    </p>
+  </section>
+
+  <h2 class="characters-title">Personajes de Hollow Knight</h2>
+
+  <section class="characters-grid">
+    <div class="character-card">
+      <img src="img/hollow.webp" alt="Caballero">
+      <div class="character-name">El Caballero</div>
+      <p>Protagonista del juego. Silencioso, resistente y misterioso.</p>
+    </div>
+
+    <div class="character-card">
+      <img src="img/Hornet_Idle.webp" alt="Hornet">
+      <div class="character-name">Hornet</div>
+      <p>Guardián veloz y letal. Juega un papel clave en el destino de Hallownest.</p>
+    </div>
+
+    <div class="character-card">
+      <img src="img/vessel.webp" alt="Hollow Knight">
+      <div class="character-name">Hollow Knight</div>
+      <p>El recipiente destinado a contener la infección. Trágico y poderoso.</p>
+    </div>
+
+    <div class="character-card">
+      <img src="img/Grimm_Idle.webp" alt="Grimm">
+      <div class="character-name">Grimm</div>
+      <p>Líder del temible Troupe Grimm. Elegante y mortal.</p>
+    </div>
+
+    <div class="character-card">
+      <img src="img/zote.jpg" alt="Zote">
+      <div class="character-name">Zote el Poderoso</div>
+      <p>Autoproclamado héroe, aunque suele terminar en problemas.</p>
+    </div>
+  </section>
+
+  <footer>
+    Proyecto de práctica con Docker · Temática Hollow Knight
+  </footer>
+
+</body>
+</html>
