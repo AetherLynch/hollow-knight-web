@@ -10,6 +10,7 @@
   "author": "aleclynch",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^17.2.3",
     "express": "^4.21.0",
     "pg": "^8.16.3"
   },

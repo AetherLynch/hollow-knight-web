@@ -26,11 +26,11 @@
     }
 
     header p {
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
       font-size: 1.1rem;
       line-height: 1.6;
-      opacity: 0.9;
+      opacity: 0.95;
     }
 
     main {
@@ -41,7 +41,7 @@
 
     h2 {
       text-align: center;
-      margin-bottom: 30px;
+      margin: 0;
       font-size: 2rem;
       border-bottom: 2px solid #444;
       display: inline-block;
@@ -57,21 +57,30 @@
 
     .character-card {
       background: rgba(20, 24, 60, 0.85);
-      border-radius: 12px;
-      padding: 20px;
+      border-radius: 14px;
+      padding: 18px;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-align: center;
     }
 
     .character-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-6px);
       box-shadow: 0 0 25px rgba(120, 140, 255, 0.6);
+    }
+
+    .character-img {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      margin-bottom: 14px;
+      filter: drop-shadow(0 0 6px rgba(255,255,255,0.25));
     }
 
     .character-name {
       font-size: 1.4rem;
       font-weight: bold;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       color: #d6dcff;
     }
 
@@ -87,11 +96,9 @@
       opacity: 0.9;
     }
 
-    .loading,
-    .error {
+    .loading {
+      grid-column: 1 / -1;
       text-align: center;
-      font-size: 1.1rem;
-      margin-top: 30px;
       opacity: 0.8;
     }
 
@@ -117,52 +124,99 @@
   </header>
 
   <main>
-    <h2>Personajes de Hallownest</h2>
+    <div style="text-align:center;">
+      <h2>Personajes de Hallownest</h2>
+    </div>
 
     <section id="charactersGrid" class="characters-grid">
-      <div class="loading">Cargando personajes desde la base de datos...</div>
+      <div class="loading">Cargando personajes...</div>
     </section>
   </main>
 
   <footer>
-    Proyecto académico · Node.js · Docker · Render · PostgreSQL · Hollow Knight
+    Proyecto académico · Node.js · Docker · Render · Hollow Knight
   </footer>
 
   <script>
-    async function loadCharacters() {
+const LOCAL_CHARACTERS = [
+  {
+    name: "El Caballero",
+    role: "Protagonista",
+    description: "Un viajero silencioso que explora Hallownest.",
+    image: "img/hollow.webp"
+  },
+  {
+    name: "Hornet",
+    role: "Guardián",
+    description: "Ágil y mortal, ligada al destino del reino.",
+    image: "img/Hornet_Idle.webp"
+  },
+  {
+    name: "Hollow Knight",
+    role: "Vasija",
+    description: "Creado para contener la infección.",
+    image: "img/vessel.webp"
+  },
+  {
+    name: "Grimm",
+    role: "Jefe",
+    description: "Elegante y peligroso líder del Troupe Grimm.",
+    image: "img/Grimm_Idle.webp"
+  },
+  {
+    name: "Zote",
+    role: "Aventurero",
+    description: "Autoproclamado héroe legendario.",
+    image: "img/zote.jpg"
+  }
+];
+
+    function isLocal() {
+      const h = location.hostname;
+      return h === "localhost" || h === "127.0.0.1" || h === "";
+    }
+
+    function renderCharacters(list) {
       const grid = document.getElementById("charactersGrid");
+      grid.innerHTML = "";
+
+      list.forEach(c => {
+        const card = document.createElement("div");
+        card.className = "character-card";
+        card.innerHTML = `
+          <img class="character-img" src="${c.image}" alt="${c.name}">
+          <div class="character-name">${c.name}</div>
+          <div class="character-role">${c.role}</div>
+          <div class="character-description">${c.description}</div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    async function loadCharacters() {
+      if (isLocal()) {
+        renderCharacters(LOCAL_CHARACTERS);
+        return;
+      }
 
       try {
         const res = await fetch("/api/characters");
+        if (!res.ok) throw new Error();
 
-        if (!res.ok) {
-          throw new Error("Respuesta inválida del servidor");
+        const data = await res.json();
+        if (!Array.isArray(data) || data.length === 0) {
+          renderCharacters(LOCAL_CHARACTERS);
+          return;
         }
 
-        const characters = await res.json();
-        grid.innerHTML = "";
-
-        characters.forEach((c) => {
-          const card = document.createElement("div");
-          card.className = "character-card";
-
-          card.innerHTML = `
-            <div class="character-name">${c.name}</div>
-            <div class="character-role">${c.role}</div>
-            <div class="character-description">${c.description}</div>
-          `;
-
-          grid.appendChild(card);
-        });
-
-        if (characters.length === 0) {
-          grid.innerHTML =
-            '<div class="loading">No hay personajes registrados.</div>';
-        }
-      } catch (error) {
-        console.error(error);
-        grid.innerHTML =
-          '<div class="error">❌ Error cargando personajes desde la base de datos.</div>';
+        renderCharacters(
+          data.map(c => ({
+            ...c,
+            image: c.image || "img/knight.png"
+          }))
+        );
+      } catch {
+        renderCharacters(LOCAL_CHARACTERS);
       }
     }
 
